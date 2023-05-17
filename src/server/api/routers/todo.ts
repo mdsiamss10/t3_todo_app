@@ -8,7 +8,7 @@ export const todoRouter = createTRPCRouter({
         userId: ctx.session.user.id,
       },
     });
-    return todos;
+    return todos.map(({ id, text, done }) => ({ id, text, done }));
   }),
   createTodos: protectedProcedure
     .input(z.string())
