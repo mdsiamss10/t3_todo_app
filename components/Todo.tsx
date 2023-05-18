@@ -30,6 +30,11 @@ function Todo({ todo }: Todo) {
       // Return a context object with the snapshotted value
       return { previousTodos };
     },
+    onError: (err, done, context) => {
+      alert(err);
+      if (!context) return;
+      trpc.todo.getAllTodos.setData(undefined, () => context.previousTodos);
+    },
     onSettled: async () => {
       await trpc.todo.getAllTodos.invalidate();
     },
@@ -52,6 +57,11 @@ function Todo({ todo }: Todo) {
 
       // Return a context object with the snapshotted value
       return { previousTodos };
+    },
+    onError: (err, done, context) => {
+      alert(err);
+      if (!context) return;
+      trpc.todo.getAllTodos.setData(undefined, () => context.previousTodos);
     },
     onSettled: async () => {
       await trpc.todo.getAllTodos.invalidate();
